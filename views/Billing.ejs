@@ -3,12 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exported Project</title>
+  <title>Tax Invoice - Tirupati Gold House</title>
   <link rel="stylesheet" href="stylesheets/Billing.css">
+</head>
+<body>
+  <!-- <%- include('partials/navbar') %>   -->
+  <div class="invoice-container">
+    <div class="header">
+      <div class="company-details">
+        <h2>TIRUPATI GOLD HOUSE</h2>
+        <p>264, Diamond Harbour Road, Opp. Behala Thana, Kolkata - 700009, West Bengal</p>
+        <p>Mobile: +91 9836765690</p>
+      </div>
+      <div class="gst">GSTIN: 19AKXPP2097D1Z1</div>
+    </div>
+    
+    <div class="invoice-details">
+      <h3>Tax Invoice</h3>
+      <p><strong>Invoice No:</strong> <input type="text" id="invoice-number" value="TGH/0601"></p>
+      <p><strong>Date:</strong> <input type="date" id="invoice-date" value="2020-07-19"></p>
+      <p><strong>Place of Supply:</strong> <input type="text" id="place-of-supply" value="West Bengal"></p>
+    </div>
+    
+    <hr>
+    
+    <div class="invoice-details">
+      <h3>Invoice To:</h3>
+      <p><strong>Name:</strong> <input type="text" id="customer-name" value="Snigdha Panja"></p>
+      <p><strong>Address:</strong> <input type="text" id="customer-address" value="324 Diamond Harbour Road, Kolkata - 700009, West Bengal"></p>
+    </div>
+    
+    <hr>
+    
+    <table id="invoice-table">
+      <thead>
+        <tr>
+          <th>Item Description</th>
+          <th>PCS</th>
+          <th>Purity</th>
+          <th>Weight (g)</th>
+          <th>Rate (₹/g)</th>
+          <th>Amount (₹)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically added here -->
+      </tbody>
+    </table>
 
-  <body>
+    <!-- Add Item Button -->
+    <div class="add-item-container">
+      <button onclick="addItem()" class="add-item-button">Add Item</button>
+    </div>
+    
+    <div class="footer">
+      <p><strong>Total Amount Payable: ₹<span id="total-amount">0</span></strong></p>
+      <p><strong>Amount in Words:</strong> <span id="amount-in-words">Zero Only</span></p>
+    </div>
 
-    <%- include('partials/navbar') %>   
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button onclick="printInvoice()" class="print-button">Print Invoice</button>
+      <button onclick="saveInvoice()" class="save-button">Save Invoice</button>
+      <button onclick="clearInvoice()" class="clear-button">Clear Invoice</button>
+    </div>
+  </div>
 
+  <script src="javascripts/Billing.js"></script>
 </body>
 </html>
