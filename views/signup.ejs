@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page - Luxury Theme</title>
+    <link rel="stylesheet" href="/stylesheets/signup.css">
+</head>
+
+<body>
+
+
+    <%- include('partials/navbar') %>
+
+
+        <div class="signup-container">
+            <h2>Sign Up</h2>
+            <form id="signup-form" action="/signup" method="post">
+                <div class="input-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirmpass" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+
+            <p class="login-link">Already have an account? <a href="/login">Login</a></p>
+        </div>
+        <script src="/javascripts/signup.js"></script>
+</body>
+
+</html>

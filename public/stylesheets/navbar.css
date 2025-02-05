@@ -1,0 +1,92 @@
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Adds a blur effect */
+  z-index: 1000;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+
+.navbar-logo img {
+  height: 40px;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #fff; /* White text for better visibility */
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  color: #b8860b; /* Gold color for hover effect */
+}
+
+.navbar-profile {
+  margin-left: auto; /* Pushes the profile picture to the right */
+  padding: 0 10px; /* Adds some spacing around the profile picture */
+}
+
+.profile-pic {
+  width: 40px; /* Adjust the size as needed */
+  height: 40px; /* Adjust the size as needed */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.navbar-cta button {
+  background: #b8860b; /* Gold color */
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.navbar-cta button:hover {
+  background: #a67c00; /* Darker gold on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .navbar-links {
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+  }
+
+  .navbar-profile {
+      margin-left: 0;
+      margin-top: 1rem;
+  }
+
+  .navbar-cta {
+      margin-top: 1rem;
+  }
+}
