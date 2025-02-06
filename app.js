@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port =3000;
+const port = 3000;
 const dotenv = require('dotenv');
 dotenv.config();
 const connectDB = require('./config/db');
@@ -11,7 +11,7 @@ const loginRoutes = require('./routes/login');
 const signupRoutes = require('./routes/signup');
 const Billing = require('./routes/Billing');
 const pleged = require('./routes/pleged');
-const profile     = require('./routes/profile');
+const profile = require('./routes/profile');
 
 
 
@@ -30,7 +30,7 @@ app.use('/profile', profile);
 
 
 
-  
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 3000');
