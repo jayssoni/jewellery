@@ -59,7 +59,7 @@ router.post(
       const hashedPassword = await bcrypt.hash(password, 10);
 
       const createdUser = await User.create({
-        fullname,
+       name : fullname,
         email,
         password: hashedPassword,
       });
