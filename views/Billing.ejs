@@ -6,7 +6,7 @@
     <title>Tax Invoice - Tirupati Gold House</title>
     <link rel="stylesheet" href="stylesheets/Billing.css">
     <style>
-       
+        /* Add any additional styles here */
     </style>
 </head>
 <body>
@@ -28,55 +28,61 @@
         
         <h2 class="invoice-title">Tax Invoice</h2>
         
-        <div class="invoice-details">
-            <div class="invoice-meta">
-                <p><strong>Invoice No:</strong> <input type="text" id="invoice-number"></p>
-                <p><strong>Date:</strong> <input type="date" id="invoice-date"></p>
-                <p><strong>Place of Supply:</strong> West Bengal</p>
+        <!-- Form starts here -->
+        <form id="invoice-form" action="/Billing" method="POST">
+            <div class="invoice-details">
+                <div class="invoice-meta">
+                    <p><strong>Invoice No:</strong> <input type="text" id="invoice-number" name="invoiceNumber" required></p>
+                    <p><strong>Date:</strong> <input type="date" id="invoice-date" name="invoiceDate" required></p>
+                    <p><strong>Place of Supply:</strong> West Bengal</p>
+                </div>
+                <div class="customer-details">
+                    <h3>Invoice To:</h3>
+                    <p><strong>Name:</strong> <input type="text" id="customer-name" name="customerName" required></p>
+                    <p><strong>Address:</strong> <input type="text" id="customer-address" name="customerAddress" required></p>
+                    <p><strong>Mobile:</strong> <input type="text" id="customer-mobile" name="customerMobile" required></p>
+                </div>
             </div>
-            <div class="customer-details">
-                <h3>Invoice To:</h3>
-                <p><strong>Name:</strong> <input type="text" id="customer-name"></p>
-                <p><strong>Address:</strong> <input type="text" id="customer-address"></p>
-                <p><strong>Mobile:</strong> <input type="text" id="customer-mobile"></p>
+            
+            <table class="invoice-table" id="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Item Description</th>
+                        <th>PCS</th>
+                        <th>Purity</th>
+                        <th>Weight (g)</th>
+                        <th>Rate (&#8377;/g)</th>
+                        <th>Amount (&#8377;)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="invoice-body">
+                    <!-- Rows will be dynamically added here -->
+                </tbody>
+            </table>
+            <button type="button" onclick="addRow()" class="no-print">Add Item</button>
+            
+            <div class="footer">
+                <p><strong>Total Amount Payable: &#8377; <span id="total-amount" name ="total">0.00</span></strong></p>
+                <p><strong>Amount in Words:</strong> <span id="amount-in-words">Zero Only</span></p>
             </div>
-        </div>
-        
-        <table class="invoice-table" id="invoice-table">
-            <thead>
-                <tr>
-                    <th>Item Description</th>
-                    <th>PCS</th>
-                    <th>Purity</th>
-                    <th>Weight (g)</th>
-                    <th>Rate (&#8377;/g)</th>
-                    <th>Amount (&#8377;)</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="invoice-body"></tbody>
-        </table>
-        <button onclick="addRow()" class="no-print">Add Item</button>
-        
-        <div class="footer">
-            <p><strong>Total Amount Payable: &#8377; <span id="total-amount">0.00</span></strong></p>
-            <p><strong>Amount in Words:</strong> <span id="amount-in-words">Zero Only</span></p>
-        </div>
-        
-        <div class="signature-container">
-            <div class="customer-signature">
-                <p>Customer Signature</p>
+            
+            <div class="signature-container">
+                <div class="customer-signature">
+                    <p>Customer Signature</p>
+                </div>
+                <div class="authorized-signature">
+                    <p>Authorized Signature</p>
+                </div>
             </div>
-            <div class="authorized-signature">
-                <p>Authorized Signature</p>
+            
+            <div class="button-container no-print">
+                <button type="button" class="print-button" onclick="printInvoice()">Print</button>
+                <button type="submit" class="save-button">Save</button>
+                <button type="button" class="clear-button" onclick="clearRowData()">Clear</button>
             </div>
-        </div>
-        
-        <div class="button-container no-print">
-            <button class="print-button" onclick="printInvoice()">Print</button>
-            <button class="save-button" onclick="saveInvoice()">Save</button>
-            <button class="clear-button" onclick="clearRowData()">Clear</button>
-        </div>
+        </form>
+        <!-- Form ends here -->
     </div>
     
     <script src="/javascripts/Billing.js"></script>
