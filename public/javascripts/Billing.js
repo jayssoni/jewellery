@@ -46,8 +46,6 @@ function updateAmount(input) {
   let weight = parseFloat(row.children[3].children[0].value) || 0;
   let rate = parseFloat(row.children[4].children[0].value) || 0;
   let amountInput = row.children[5].children[0];
-  let amount = pcs * weight * rate;
-  amountInput.value = amount ? amount.toFixed(2) : "";
   updateTotal();
 }
 
