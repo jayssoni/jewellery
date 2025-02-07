@@ -1,15 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exported Project</title>
-  <link rel="stylesheet" href="/stylesheets/pleged.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Ledger</title>
+    <link rel="stylesheet" href="/stylesheets/pleged.css">
 </head>
 <body>
 
-  <%- include('partials/navbar') %>  
+    <%- include('partials/navbar') %>
 
+    <section class="ledger-container">
+        <h1>Credit Ledger</h1>
+
+        <!-- Form to Add New Entry -->
+        <form action="/pleged/add" method="POST">
+            <input type="text" name="name" placeholder="Customer Name" required>
+            <input type="number" name="amount" placeholder="Amount (Rs)" required>
+            <input type="date" name="date" required>
+            <button type="submit">Add Entry</button>
+        </form>
+
+        <h2>Credit Ledger Records</h2>
+        
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Amount (Rs)</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr>
+                            <td> record.name </td>
+                            <td>Rs. record.amount</td>
+                            <td>record.date </td>
+                            <td>
+                                <form action="/pleged/delete" method="POST" style="display:inline;">
+                                    <button type="submit" class="delete-btn">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        
+            <p>No records found. Start adding Credit Ledger transactions.</p>
+       
+    </section>
+
+   
 
 </body>
 </html>

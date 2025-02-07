@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/home', home_page);
+app.use('/', home_page);
 app.use('/login', loginRoutes);
 app.use('/signup', signupRoutes);
 app.use('/Billing', Billing);
