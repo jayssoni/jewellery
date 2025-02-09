@@ -35,10 +35,8 @@ const profileSchema = new mongoose.Schema({
         enum: ['aadhar', 'pan', 'passport'],
         required: true
     },
-    idDocument: {
-        type: String,
-        required: true
-    },
+    
+
 },
     { timestamps: true });
 

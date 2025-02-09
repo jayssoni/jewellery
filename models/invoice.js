@@ -6,8 +6,18 @@ const invoice = new mongoose.Schema({
     customerName : String, 
     customerAddress : String,
     customerMobile : Number,
-    total: Number
-})
+    total: Number,
+
+    user : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    },
+
+    profile : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Profile'
+    }
+}, {timestamps : true});
 
 const invoiceData = mongoose.model('invoice' , invoice);
 module.exports = invoiceData;
