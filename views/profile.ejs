@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="/stylesheets/profile.css">
 </head>
 <body>
-    <form action="/profile" method="post" enctype="multipart/form-data">
     <div class="container">
-        
+        <!-- Left Column: Profile Picture -->
         <div class="left-column">
             <div class="profile-pic">
                 <img id="profileImage" src="/images/logo.png" alt="Profile Picture">
                 <label for="profilePic">Change Profile Picture</label>
-                <input type="file" id="profilePic" class="file-input" accept="image/*" onchange="loadFile(event)" name="profileImage">
+                <input type="file" id="profilePic" class="file-input" accept="image/*" onchange="loadFile(event)">
             </div>
         </div>
 
         <!-- Right Column: Form Fields -->
         <div class="right-column">
             <h2>Business Profile</h2>
+            <form action="/profile" method="post">
                 <div class="form-group">
                     <label for="businessName">Business Name</label>
                     <input type="text" id="businessName" placeholder="Enter Business Name" required name="businessName">
