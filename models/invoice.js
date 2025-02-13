@@ -28,16 +28,16 @@ const invoiceSchema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    profile: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profile',
-        required: true
-    }
+    // user: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
+    // profile: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Profile',
+    //     required: true
+    // }
 }, { timestamps: true });
 
 const Invoice = mongoose.model('Invoice', invoiceSchema);

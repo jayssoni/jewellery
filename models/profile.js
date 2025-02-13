@@ -26,16 +26,17 @@ const profileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profileImage: {
-        type: String,
-        default: '/images/logo.png'
-    },
+  
     idType: {
         type: String,
         enum: ['aadhar', 'pan', 'passport'],
         required: true
     },
-    
+     user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 
 },
     { timestamps: true });

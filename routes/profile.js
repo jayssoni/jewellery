@@ -3,8 +3,15 @@ const router = express.Router();
 const Profile = require('../models/profile');
 
 
-router.get('/', (req, res) => {
-  res.render('profile'); // Render the profile.ejs template
+router.get('/', async (req, res) => {
+  try {
+    const profile = await Profile.findOne(); // Database se ek profile fetch karein
+
+    res.render('profile', { profile }); // Profile data ko frontend par bhejna
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching profile data");      
+  }
 });
 
 router.post('/', async (req, res) => {
