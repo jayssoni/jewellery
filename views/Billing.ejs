@@ -13,7 +13,6 @@
     <div class="invoice-container">
         <div class="header">
             <div class="company-details">
-                <img src="images/image.png" alt="Company Logo" class="logo">
                 <div class="company-info">
                     <h2>TIRUPATI GOLD HOUSE</h2>
                     <p>264, Diamond Harbour Road, Opp. Behala Thana, Kolkata - 700009, West Bengal</p>
@@ -34,7 +33,6 @@
                 <div class="invoice-meta">
                     <p><strong>Invoice No:</strong> <input type="text" id="invoice-number" name="invoiceNumber" required></p>
                     <p><strong>Date:</strong> <input type="date" id="invoice-date" name="invoiceDate" required></p>
-                    <p><strong>Place of Supply:</strong> West Bengal</p>
                 </div>
                 <div class="customer-details">
                     <h3>Invoice To:</h3>
@@ -63,8 +61,14 @@
             <button type="button" onclick="addRow()" class="no-print">Add Item</button>
             
             <div class="footer">
-                <p><strong>Total Amount Payable: &#8377; <span id="total-amount" name ="total">0.00</span></strong></p>
-                <p><strong>Amount in Words:</strong> <span id="amount-in-words">Zero Only</span></p>
+                <p><strong>Total Amount Payable: &#8377; <input type="text" id="total-amount" name="total" value="0.00" required></strong></p>
+            </div>
+            
+            <!-- New Payment Status Section -->
+            <div class="payment-status">
+                <p><strong>Amount Paid: &#8377; <input type="number" id="amount-paid" name="amountPaid" oninput="updateOutstanding()"></strong></p>
+                <p><strong>Outstanding Amount: &#8377; <span id="outstanding-amount">0.00</span></strong></p>
+                <p><strong>Payment Status:</strong> <span id="payment-status">Pending</span></p>
             </div>
             
             <div class="signature-container">

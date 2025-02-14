@@ -1,4 +1,3 @@
-
 let currentFocusedRow;
 
 document.addEventListener('focusin', function (e) {
@@ -35,26 +34,34 @@ function clearRowData() {
   } else {
     document.querySelectorAll(".invoice-details input").forEach(input => input.value = "");
     document.getElementById("invoice-body").innerHTML = "";
-    document.getElementById("total-amount").innerText = "0.00";
+    document.getElementById("total-amount").value = "0.00";
     document.getElementById("amount-in-words").innerText = "Zero Only";
+    document.getElementById("amount-paid").value = "";
+    document.getElementById("outstanding-amount").innerText = "0.00";
+    document.getElementById("payment-status").innerText = "Pending";
   }
-}
-
-function updateAmount(input) {
-  let row = input.parentElement.parentElement;
-  let pcs = parseFloat(row.children[1].children[0].value) || 0;
-  let weight = parseFloat(row.children[3].children[0].value) || 0;
-  let rate = parseFloat(row.children[4].children[0].value) || 0;
-  let amountInput = row.children[5].children[0];
-  updateTotal();
 }
 
 function updateTotal() {
   let total = 0;
   document.querySelectorAll(".manual-amount").forEach(input => {
-    total += parseFloat(input.value) || 0;
+      total += parseFloat(input.value) || 0;
   });
-  document.getElementById("total-amount").innerText = total.toFixed(2);
+  document.getElementById("total-amount").value = total.toFixed(2);
+  updateOutstanding();
+}
+
+function updateOutstanding() {
+  let totalAmount = parseFloat(document.getElementById("total-amount").value) || 0;
+  let amountPaid = parseFloat(document.getElementById("amount-paid").value) || 0;
+  let outstandingAmount = totalAmount - amountPaid;
+  document.getElementById("outstanding-amount").innerText = outstandingAmount.toFixed(2);
+  
+  if (outstandingAmount <= 0) {
+    document.getElementById("payment-status").innerText = "Paid";
+  } else {
+    document.getElementById("payment-status").innerText = "Pending";
+  }
 }
 
 function saveInvoice() {
@@ -64,6 +71,10 @@ function saveInvoice() {
     customerName: document.getElementById("customer-name").value,
     customerAddress: document.getElementById("customer-address").value,
     customerMobile: document.getElementById("customer-mobile").value,
+    totalAmount: document.getElementById("total-amount").value,
+    amountPaid: document.getElementById("amount-paid").value,
+    outstandingAmount: document.getElementById("outstanding-amount").innerText,
+    paymentStatus: document.getElementById("payment-status").innerText,
     items: []
   };
 

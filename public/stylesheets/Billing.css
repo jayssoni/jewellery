@@ -212,3 +212,14 @@ button {
         width: 100%;
     }
 }
+.payment-status {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.payment-status p {
+  margin: 5px 0;
+}
