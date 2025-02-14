@@ -8,8 +8,8 @@
 /* Fonts */
 body {
     font-family: Arial, sans-serif;
-    background: url('luxury-bg.jpg') no-repeat center center/cover;
-    color: #ffffff;
+    background: url('/images/jewel_bg.jpg') no-repeat center center/cover; /* Light background image */
+    color: #333333; /* Dark text color */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,28 +18,28 @@ body {
 
 /* Login Container */
 .login-container {
-    background:#343434 ;
+    background: #ffffff; /* White background */
     padding: 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
     text-align: center;
     max-width: 400px;
     width: 100%;
-    color: #ffffff;
+    color: #333333; /* Dark text color */
 }
 
 /* Headings */
 h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
-    color: #f9d848;
+    color: #b8860b; /* Gold color */
     margin-bottom: 0.5rem;
 }
 
 .subtitle {
     font-size: 1rem;
     margin-bottom: 1.5rem;
-    color: #ddd;
+    color: #666666; /* Dark gray text */
 }
 
 /* Input Fields */
@@ -51,31 +51,31 @@ h2 {
 .input-group label {
     display: block;
     font-size: 0.9rem;
-    color: #ddd;
+    color: #666666; /* Dark gray text */
     margin-bottom: 0.3rem;
 }
 
 .input-group input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #555;
+    border: 1px solid #cccccc; /* Light gray border */
     border-radius: 6px;
-    background-color: #222222;
-    color: #ffffff;
+    background-color: #f9f9f9; /* Light gray background */
+    color: #333333; /* Dark text color */
     font-size: 1rem;
 }
 
 .input-group input:focus {
     outline: none;
-    border-color:#f9d848;
+    border-color: #b8860b; /* Gold color */
 }
 
 /* Button Styling */
 button {
     width: 100%;
     padding: 0.75rem;
-    background: linear-gradient(45deg, #b8860b,#f9d848);
-    color: #ffffff;
+    background: linear-gradient(45deg, #b8860b, #f9d848); /* Gold gradient */
+    color: #ffffff; /* White text */
     border: none;
     border-radius: 6px;
     font-size: 1rem;
@@ -85,7 +85,7 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(45deg,#f9d848, #ffd700);
+    background: linear-gradient(45deg, #f9d848, #ffd700); /* Lighter gold gradient */
     transform: scale(1.05);
 }
 
@@ -93,10 +93,11 @@ button:hover {
 .signup-link {
     margin-top: 1rem;
     font-size: 0.9rem;
+    color: #666666; /* Dark gray text */
 }
 
 .signup-link a {
-    color:#f9d848;
+    color: #b8860b; /* Gold color */
     text-decoration: none;
     font-weight: bold;
 }

@@ -8,8 +8,8 @@
 /* Body Styling */
 body {
     font-family: Arial, sans-serif;
-    background: url('luxury-bg.jpg') no-repeat center center/cover;
-    color: #ffffff;
+    background: url('/images/jewel_bg.jpg') no-repeat center center/cover; /* Light background image */
+    color: #333333; /* Dark text color */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +18,10 @@ body {
 
 /* Signup Container */
 .signup-container {
-    background-color: rgba(30, 30, 30, 0.9);
+    background-color: #ffffff; /* White background */
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
     width: 100%;
     max-width: 400px;
 }
@@ -29,7 +29,7 @@ body {
 .signup-container h2 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: gold;
+    color: #b8860b; /* Gold color */
 }
 
 /* Input Group Styling */
@@ -40,53 +40,31 @@ body {
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #cccccc;
+    color: #666666; /* Dark gray text */
 }
 
 .input-group input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #555;
+    border: 1px solid #cccccc; /* Light gray border */
     border-radius: 5px;
-    background-color: #222;
-    color: #ffffff;
+    background-color: #f9f9f9; /* Light gray background */
+    color: #333333; /* Dark text color */
     font-size: 1rem;
 }
 
 .input-group input:focus {
     outline: none;
-    border-color: gold;
+    border-color: #b8860b; /* Gold color */
 }
 
 /* Button Styling */
 button {
     width: 100%;
     padding: 0.75rem;
-    background-color: gold;
-    color: #222;
+    background-color: #b8860b; /* Gold color */
+    color: #ffffff; /* White text */
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #d4af37;
-}
-
-/* Login Link Styling */
-.login-link {
-    text-align: center;
-    margin-top: 1rem;
-    color: #cccccc;
-}
-
-.login-link a {
-    color: gold;
-    text-decoration: none;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
-}

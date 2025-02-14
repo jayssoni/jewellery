@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const invoiceData = require('../models/invoice');
+const Profile = require('../models/profile'); // Import the Profile model
 
 // GET: Fetch all invoices
 router.get('/', async (req, res) => {
     try {
-        const invoices = await invoiceData.find().populate('user', 'name email').populate('profile', 'businessName');
-        res.render('Billing', { invoices });
+        const invoices = await invoiceData.find().populate('user', 'name email').populate('profile', 'businessName ownerName gst address phone email');
+        const profile = await Profile.findOne(); // Fetch the profile data
+        res.render('Billing', { invoices, profile }); // Pass profile data to the view
     } catch (error) {
         console.error("Error fetching invoices:", error);
         res.status(500).send("Server error while fetching invoices.");

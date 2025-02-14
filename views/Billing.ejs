@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Invoice - Tirupati Gold House</title>
+    <title>Tax Invoice - <%= profile.businessName %></title>
     <link rel="stylesheet" href="stylesheets/Billing.css">
     <style>
         /* Add any additional styles here */
@@ -14,14 +14,14 @@
         <div class="header">
             <div class="company-details">
                 <div class="company-info">
-                    <h2>TIRUPATI GOLD HOUSE</h2>
-                    <p>264, Diamond Harbour Road, Opp. Behala Thana, Kolkata - 700009, West Bengal</p>
-                    <p>Mobile: +91 9836765690</p>
+                    <h2><%= profile.businessName %></h2>
+                    <p><%= profile.address %></p>
+                    <p>Mobile: <%= profile.phone %></p>
                 </div>
             </div>
             <div class="gst-container">
                 <p class="gst-label">GSTIN:</p>
-                <p class="gst-value">19AKXPP2097D1Z1</p>
+                <p class="gst-value"><%= profile.gst %></p>
             </div>
         </div>
         

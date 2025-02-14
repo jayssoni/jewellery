@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.9); /* Semi-transparent background */
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
   backdrop-filter: blur(10px); /* Adds a blur effect */
   z-index: 1000;
   transition: background 0.3s ease, backdrop-filter 0.3s ease;
@@ -33,7 +33,7 @@
 
 .navbar-links li a {
   text-decoration: none;
-  color: #fff; /* White text for better visibility */
+  color: #333; /* Dark text for better visibility */
   font-weight: 500;
   transition: color 0.3s ease;
 }

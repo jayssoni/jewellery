@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #000;
-  color: #fff;
+  background: #f9f9f9; /* Light background */
+  color: #333; /* Dark text for readability */
 }
 
 .landing-page-container {
@@ -35,7 +35,7 @@ footer {
 /* Hero Section */
 .hero-section {
   position: relative;
-  background: #1d2128;
+  background: #f0f0f0; /* Light gray background */
 }
 
 .hero-image {
@@ -55,16 +55,18 @@ footer {
   font-size: 64px;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
+  color: #333; /* Dark text */
 }
 
 .hero-text p {
   font-size: 24px;
   margin: 20px 0;
+  color: #666; /* Gray text */
 }
 
 .hero-text button {
-  background: #3c3c3c;
-  color: #fff;
+  background: #b8860b; /* Gold color */
+  color: #fff; /* White text */
   border: none;
   padding: 10px 20px;
   border-radius: 6px;
@@ -80,12 +82,14 @@ footer {
   font-size: 48px;
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
+  color: #333; /* Dark text */
 }
 
 .featured-collection p {
   font-size: 18px;
   margin: 20px auto;
   max-width: 680px;
+  color: #666; /* Gray text */
 }
 
 .collection-items {
@@ -106,16 +110,17 @@ footer {
 .item h3 {
   font-size: 40px;
   margin: 20px 0;
+  color: #333; /* Dark text */
 }
 
 .item p {
   font-size: 18px;
-  color: #9095a0;
+  color: #666; /* Gray text */
 }
 
 .item button {
-  background: #3c3c3c;
-  color: #fff;
+  background: #b8860b; /* Gold color */
+  color: #fff; /* White text */
   border: none;
   padding: 10px 20px;
   border-radius: 16px;
@@ -136,51 +141,23 @@ footer {
   font-size: 20px;
   margin: 20px auto;
   max-width: 736px;
+  color: #666; /* Gray text */
 }
 
 .testimonial span {
   font-size: 20px;
   font-weight: 700;
+  color: #333; /* Dark text */
 }
 
 /* Footer */
 footer {
-  background: #171a1f;
+  background: #e0e0e0; /* Light gray background */
   text-align: center;
 }
 
 .footer-links a {
-  color: #f3f4f6;
+  color: #333;
   text-decoration: none;
-  margin: 0 10px;
-}
-
-.newsletter {
-  margin: 20px 0;
-}
-
-.newsletter input {
-  padding: 10px;
-  border-radius: 22px 0 0 22px;
-  border: 1px solid #565e6c;
-  background: transparent;
-  color: #f3f4f6;
-}
-
-.newsletter button {
-  background: #3c3c3c;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 0 22px 22px 0;
-  cursor: pointer;
-}
-
-.social-media a {
-  margin: 0 10px;
-}
-
-.social-media img {
-  width: 24px;
-  height: 24px;
+  font-size: 14px;
 }
