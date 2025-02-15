@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/authMiddleware'); // Import middleware
 
-// Homepage route
-router.get('/', (req, res) => {
-  res.render('home_page'); // Render the home.ejs template
+// Use authMiddleware to protect this route
+router.get('/', authMiddleware, (req, res) => {
+    res.render('home_page', { user: req.user });
 });
 
 module.exports = router;

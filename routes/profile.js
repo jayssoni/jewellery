@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const Profile = require('../models/profile');
+const authMiddleware = require('../middleware/authMiddleware');
 
-
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware,async (req, res) => {
   try {
     const profile = await Profile.findOne(); // Database se ek profile fetch karein
 
-    res.render('profile', { profile }); // Profile data ko frontend par bhejna
+    res.render('profile', { profile, user: req.user }); // Profile data ko frontend par bhejna
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching profile data");      

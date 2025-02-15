@@ -32,11 +32,10 @@ const profileSchema = new mongoose.Schema({
         enum: ['aadhar', 'pan', 'passport'],
         required: true
     },
-     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+     user: { type: mongoose.Schema.Types.ObjectId,
+         ref: 'User' ,
+         required: true
+        }, // Made optional
 
 },
     { timestamps: true });
