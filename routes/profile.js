@@ -3,9 +3,10 @@ const router = express.Router();
 const Profile = require('../models/profile');
 const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/', authMiddleware,async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
   try {
-    const profile = await Profile.findOne(); // Database se ek profile fetch karein
+    // Fetch profile data associated with the logged-in user
+    const profile = await Profile.findOne({ user: req.user.id });
 
     res.render('profile', { profile, user: req.user }); // Profile data ko frontend par bhejna
   } catch (error) {
@@ -26,6 +27,7 @@ router.post('/', async (req, res) => {
       email,
       idDocument,
       idType,
+      user: req.user.id, // Associate the profile with the logged-in user
     });
 
     res.send("Profile created successfully");
@@ -34,6 +36,5 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 module.exports = router;

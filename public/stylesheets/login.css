@@ -8,7 +8,7 @@
 /* Fonts */
 body {
     font-family: Arial, sans-serif;
-    background: url('/images/jewel_bg.jpg') no-repeat center center/cover; /* Light background image */
+    background: url('/images/jewel_bg.png') no-repeat center center/cover; /* Light background image */
     color: #333333; /* Dark text color */
     display: flex;
     justify-content: center;

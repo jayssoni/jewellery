@@ -31,10 +31,10 @@ router.post('/', async (req, res) => {
         // Set token in cookie
         res.cookie('token', token, { httpOnly: true });
 
-        // Fetch profile data
-        const profile = await Profile.findOne();
+        // Fetch profile data associated with the logged-in user
+        const profile = await Profile.findOne({ user: user._id });
 
-        // Redirect to home page
+        // Redirect to home page with profile data
         res.render('home_page', { profile });
     } catch (error) {
         console.error(error);
