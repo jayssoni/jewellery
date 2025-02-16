@@ -5,10 +5,10 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    // Fetch profile data associated with the logged-in user
-    const profile = await Profile.findOne({ user: req.user.id });
+    // Fetch profile data associated with the logged-in user  
+    const profile = await Profile.findOne({ user: req.user.id }); 
 
-    res.render('profile', { profile, user: req.user }); // Profile data ko frontend par bhejna
+    res.render('profile', { profile, user: req.user }); // Profile data ko frontend par bhejna  
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching profile data");      
