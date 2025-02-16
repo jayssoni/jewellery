@@ -13,6 +13,8 @@ const signupRoutes = require('./routes/signup');
 const Billing = require('./routes/Billing');
 const pleged = require('./routes/pleged');
 const profile = require('./routes/profile');
+const logoutRoutes = require('./routes/logout');
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -26,6 +28,9 @@ app.use('/signup', signupRoutes);
 app.use('/Billing', Billing);
 app.use('/pleged', pleged);
 app.use('/profile', profile);
+app.use('/logout', logoutRoutes);
+
+
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running on port 3000');
