@@ -15,7 +15,7 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/',authMiddleware, async (req, res) => {
   try {
     const { businessName, ownerName, gst, address, phone, email, idDocument, idType } = req.body;
     const profileCreated = await Profile.create({
