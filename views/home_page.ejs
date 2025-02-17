@@ -15,6 +15,12 @@
   <%- include('partials/navbar') %>   
 
 
+  
+        <!-- Flash Messages -->
+        <% if (success_msg) { %>
+          <p class="flash-message success"><%= success_msg %></p>
+      <% } %>
+
   <div class="landing-page-container">
     <div class="landing-page">
       <div class="hero-section">
