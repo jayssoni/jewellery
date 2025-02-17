@@ -11,6 +11,13 @@
 <body>
 
 
+<!-- Flash Messages -->
+<% if (success_msg) { %>
+    <p class="flash-message success"><%= success_msg %></p>
+<% } %>
+<% if (error_msg) { %>
+    <p class="flash-message error"><%= error_msg %></p>
+<% } %>
 
 
         <div class="signup-container">

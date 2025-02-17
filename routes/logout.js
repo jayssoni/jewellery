@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    res.clearCookie('token');  // Clear the JWT token cookie
-    return res.redirect('/login');  // Redirect to login page
+    res.clearCookie('token');  
+    req.flash('success_msg', 'You have logged out successfully');
+    return res.redirect('/login');  
 });
 
 module.exports = router;

@@ -6,30 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Exquisite Access</title>
     <link rel="stylesheet" href="/stylesheets/login.css">
-
 </head>
 
 <body>
-   
 
-        <div class="login-container">
-            <h2>Welcome Back</h2>
-            <p class="subtitle">Unlock timeless elegance</p>
-            <form id="login-form" action="/login" method="post">
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Unlock timeless elegance</p>
 
-            <p class="signup-link">New here? <a href="/signup">Create an account</a></p>
-        </div>
-        <!-- <script src="/javascripts/login.js"></script> -->
+        <!-- Flash Messages -->
+        <% if (success_msg) { %>
+            <p class="flash-message success"><%= success_msg %></p>
+        <% } %>
+        <% if (error_msg) { %>
+            <p class="flash-message error"><%= error_msg %></p>
+        <% } %>
+
+        <form id="login-form" action="/login" method="post">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="signup-link">New here? <a href="/signup">Create an account</a></p>
+    </div>
+
 </body>
 
 </html>
