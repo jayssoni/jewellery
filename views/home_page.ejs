@@ -9,51 +9,54 @@
   <link rel="stylesheet" href="/stylesheets/home_page.css">
 </head>
 
-
 <body>
 
   <%- include('partials/navbar') %>   
 
-
-  
-        <!-- Flash Messages -->
-        <% if (success_msg) { %>
-          <p class="flash-message success"><%= success_msg %></p>
-      <% } %>
-
+  <!-- Main Landing Page Container -->
   <div class="landing-page-container">
     <div class="landing-page">
+
+      <!-- Hero Section -->
       <div class="hero-section">
         <img src="/images/image1814-wzxy-700h.png" alt="Hero Image" class="hero-image">
         <div class="hero-text">
           <h1>Exquisite Elegance</h1>
           <p>Discover timeless pieces that define sophistication.</p>
-          <button>Explore Collection</button>
+          <button class="hero-btn">Explore Collection</button>
         </div>
       </div>
+
+      <!-- Featured Collection -->
       <div class="featured-collection">
         <h2>Featured Collection</h2>
         <p>Explore our exclusive selection of handcrafted jewelry pieces, each designed to captivate and inspire.</p>
+        
         <div class="collection-items">
           <div class="item">
             <img src="/images/image84125-wmi7-600w.png" alt="Diamond Necklace">
             <h3>Ethereal Diamond Necklace</h3>
             <p>This exquisite necklace features a brilliant-cut diamond centerpiece, set in a delicate gold chain.</p>
-            <button>Try now</button>
+            <button class="collection-btn">Try Now</button>
           </div>
+
           <div class="item">
             <img src="/images/image85126-6cer-600w.png" alt="Pearl Earrings">
             <h3>Classic Pearl Earrings</h3>
             <p>Timeless and sophisticated, these pearl earrings are perfect for any occasion.</p>
-            <button>Try now</button>
+            <button class="collection-btn">Try Now</button>
           </div>
         </div>
       </div>
+
+      <!-- Testimonial Section -->
       <div class="testimonial">
         <img src="/images/image9128-lgjh-400h.png" alt="Jessica Miller">
         <p>"The Jewelry Management Hub has completely transformed our inventory process. It's intuitive and saves us so much time!"</p>
         <span>Jessica Miller, Store Manager</span>
       </div>
+
+      <!-- Footer Section -->
       <footer id="contact">
         <div class="footer-content">
             <div class="contact-info">
@@ -66,7 +69,7 @@
             <div class="newsletter">
                 <h3>Subscribe to Our Newsletter</h3>
                 <input type="email" placeholder="Enter your email">
-                <button>Subscribe</button>
+                <button class="subscribe-btn">Subscribe</button>
             </div>
     
             <div class="social-media">
@@ -79,11 +82,12 @@
     
             <p>© 2025 Brand, Inc. • Privacy • Terms • Sitemap</p>
         </div>
-    </footer>
-    
+      </footer>
+
     </div>
   </div>
 
   <script src="/javascripts/navbar.js"></script>
+
 </body>
 </html>

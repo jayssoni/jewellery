@@ -1,28 +1,63 @@
-/* Navbar Styles */
+/* ======= SIMPLE & PREMIUM NAVBAR ======= */
+
+/* Navbar - Minimal & Elegant */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-  backdrop-filter: blur(10px); /* Adds a blur effect */
+  background: rgba(255, 255, 255, 0.95); /* Soft white with subtle transparency */
+  backdrop-filter: blur(10px); /* Smooth glass effect */
   z-index: 1000;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+/* Navbar Container */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
 }
 
-.navbar-logo img {
-  height: 40px;
+/* Brand Name - Premium Typography */
+.navbar-brand {
+  font-size: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #c9a227; /* Elegant gold color */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  position: relative;
 }
 
+.navbar-brand:hover {
+  color: #a8861e;
+}
+
+.navbar-brand::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #c9a227;
+  transition: width 0.3s;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+}
+
+.navbar-brand:hover::after {
+  width: 100%;
+}
+
+/* Navbar Links */
 .navbar-links {
   list-style: none;
   display: flex;
@@ -33,42 +68,59 @@
 
 .navbar-links li a {
   text-decoration: none;
-  color: #333; /* Dark text for better visibility */
-  font-weight: 500;
-  transition: color 0.3s ease;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease-in-out;
 }
 
 .navbar-links li a:hover {
-  color: #b8860b; /* Gold color for hover effect */
+  color: #c9a227;
 }
 
-.navbar-profile {
-  margin-left: auto; /* Pushes the profile picture to the right */
-  padding: 0 10px; /* Adds some spacing around the profile picture */
-}
-
+/* Profile Picture */
 .profile-pic {
-  width: 40px; /* Adjust the size as needed */
-  height: 40px; /* Adjust the size as needed */
-  border-radius: 50%; /* Makes the image circular */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #c9a227;
 }
 
-.navbar-cta button {
-  background: #b8860b; /* Gold color */
+/* Buttons */
+.navbar-cta button,
+.logout-btn {
+  background: #222;
   color: #fff;
   border: none;
-  padding: 0.5rem 1.5rem;
+  padding: 10px 18px;
   border-radius: 25px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease-in-out;
 }
 
-.navbar-cta button:hover {
-  background: #a67c00; /* Darker gold on hover */
+.navbar-cta button:hover,
+.logout-btn:hover {
+  background: #c9a227;
+  color: #000;
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+  .navbar-container {
+      padding: 1.2rem 1.5rem;
+  }
+
+  .navbar-links {
+      gap: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-container {
       flex-direction: column;
@@ -82,32 +134,12 @@
   }
 
   .navbar-profile {
-      margin-left: 0;
       margin-top: 1rem;
   }
 
-  .navbar-cta {
-      margin-top: 1rem;
+  .navbar-cta button,
+  .logout-btn {
+      width: 100%;
+      text-align: center;
   }
 }
-.navbar-profile {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Space between profile pic and logout button */
-}
-
-.logout-btn {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-}
-
-.logout-btn:hover {
-  background-color: #cc0000;
-}
-
