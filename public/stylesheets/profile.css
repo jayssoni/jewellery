@@ -170,3 +170,16 @@ button:hover {
         height: 130px;
     }
 }
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    display: none;
+}
+
+input:invalid, select:invalid {
+    border-color: red;
+}
+
+input:invalid + .error-message, select:invalid + .error-message {
+    display: block;
+}
