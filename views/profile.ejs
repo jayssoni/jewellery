@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="/stylesheets/profile.css">
 </head>
 <body>
+    <% if (messages.success) { %>
+        <div class="flash-message success"><%= messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+        <div class="flash-message error"><%= messages.error %></div>
+    <% } %>
     
 
         <!-- Right Column: Form Fields -->
