@@ -5,134 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Profile</title>
     <link rel="stylesheet" href="/stylesheets/profile.css">
-    <style>
-        /* Style for error messages */
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-left: 10px;
-            display: none;
-        }
-
-        /* Style for valid input */
-        .valid {
-            border: 2px solid green;
-        }
-
-        /* Style for invalid input */
-        .invalid {
-            border: 2px solid red;
-        }
-    </style>
 </head>
 <body>
+    
 
-    <div class="right-column">
-        <h2>Business Profile</h2>
-        <form id="businessProfileForm" action="/profile" method="post" novalidate>
-            <div class="form-group">
-                <label for="businessName">Business Name</label>
-                <input type="text" id="businessName" name="businessName" required>
-                <span class="error" id="businessNameError">Business name is required.</span>
-            </div>
-            <div class="form-group">
-                <label for="ownerName">Owner's Name</label>
-                <input type="text" id="ownerName" name="ownerName" required>
-                <span class="error" id="ownerNameError">Owner's name is required.</span>
-            </div>
-            <div class="form-group">
-                <label for="gst">GST No.</label>
-                <input type="text" id="gst" name="gst" required>
-                <span class="error" id="gstError">Enter a valid 15-character GST number.</span>
-            </div>
-            <div class="form-group">
-                <label for="address">Business Address</label>
-                <input type="text" id="address" name="address" required>
-                <span class="error" id="addressError">Business address is required.</span>
-            </div>
-            <div class="form-group">
-                <label for="phone">Mobile No.</label>
-                <input type="tel" id="phone" name="phone" required>
-                <span class="error" id="phoneError">Enter a valid 10-digit mobile number.</span>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                <span class="error" id="emailError">Enter a valid email address.</span>
-            </div>
-            <h3 style="color: gold; width: 100%;">ID Verification</h3>
-            <div class="form-group">
-                <label for="idType">Select ID Type</label>
-                <select id="idType" name="idType" required>
-                    <option value="" disabled selected>Choose an option</option>
-                    <option value="aadhar">Aadhar Card</option>
-                    <option value="pan">PAN Card</option>
-                    <option value="passport">Passport</option>
-                </select>
-                <span class="error" id="idTypeError">Please select an ID type.</span>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+        <!-- Right Column: Form Fields -->
+        <div class="right-column">
+            <h2>Business Profile</h2>
+            <form action="/profile" method="post">
+                <div class="form-group">
+                    <label for="businessName">Business Name</label>
+                    <input type="text" id="businessName" name="businessName" value="<%= profile ? profile.businessName : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="ownerName">Owner's Name</label>
+                    <input type="text" id="ownerName" name="ownerName" value="<%= profile ? profile.ownerName : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="gst">GST No.</label>
+                    <input type="text" id="gst" name="gst" value="<%= profile ? profile.gst : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Business Address</label>
+                    <input type="text" id="address" name="address" value="<%= profile ? profile.address : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile No.</label>
+                    <input type="tel" id="phone" name="phone" value="<%= profile ? profile.phone : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="<%= profile ? profile.email : '' %>" required>
+                </div>
+                <h3 style="color: gold; width: 100%;">ID Verification</h3>
+                <div class="form-group">
+                    <label for="idType">Select ID Type</label>
+                    <select id="idType" name="idType" required>
+                        <option value="" disabled>Choose an option</option>
+                        <option value="aadhar" <%= profile && profile.idType === 'aadhar' ? 'selected' : '' %>>Aadhar Card</option>
+                        <option value="pan" <%= profile && profile.idType === 'pan' ? 'selected' : '' %>>PAN Card</option>
+                        <option value="passport" <%= profile && profile.idType === 'passport' ? 'selected' : '' %>>Passport</option>
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            
+        </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("businessProfileForm");
-
-            form.addEventListener("submit", function (event) {
-                let isValid = true;
-
-                function validateField(input, errorElement, regex = null) {
-                    const value = input.value.trim();
-                    if (value === "" || (regex && !regex.test(value))) {
-                        input.classList.add("invalid");
-                        input.classList.remove("valid");
-                        errorElement.style.display = "inline";
-                        isValid = false;
-                    } else {
-                        input.classList.add("valid");
-                        input.classList.remove("invalid");
-                        errorElement.style.display = "none";
-                    }
-                }
-
-                // Validation for required text fields
-                validateField(document.getElementById("businessName"), document.getElementById("businessNameError"));
-                validateField(document.getElementById("ownerName"), document.getElementById("ownerNameError"));
-                validateField(document.getElementById("address"), document.getElementById("addressError"));
-
-                // Validate GST number (Indian format)
-                validateField(document.getElementById("gst"), document.getElementById("gstError"),
-                    /^(0[1-9]|[1-2][0-9]|3[0-7])[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z][Z][0-9A-Z]$/);
-
-                // Validate phone number (must start with 6,7,8,9 and have 10 digits)
-                validateField(document.getElementById("phone"), document.getElementById("phoneError"),
-                    /^[6789]\d{9}$/);
-
-                // Validate email (basic email pattern)
-                validateField(document.getElementById("email"), document.getElementById("emailError"),
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
-
-                // Validate ID type selection
-                const idType = document.getElementById("idType");
-                if (idType.value === "") {
-                    idType.classList.add("invalid");
-                    idType.classList.remove("valid");
-                    document.getElementById("idTypeError").style.display = "inline";
-                    isValid = false;
-                } else {
-                    idType.classList.add("valid");
-                    idType.classList.remove("invalid");
-                    document.getElementById("idTypeError").style.display = "none";
-                }
-
-                // Prevent form submission if validation fails
-                if (!isValid) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
-
+    <script src="/javascripts/profile.js"></script>
 </body>
 </html>
+
