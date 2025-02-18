@@ -11,6 +11,17 @@
 
 <body>
 
+  <% if (success_msg) { %>
+    <div id="flash-message" class="flash-message success">
+      <span id="flash-text"><%= success_msg %></span>
+    </div>
+  <% } %>
+  
+
+    
+  
+
+
   <%- include('partials/navbar') %>   
 
   <!-- Main Landing Page Container -->
@@ -95,7 +106,20 @@
     </div>
   </div>
 
-  <script src="/javascripts/navbar.js"></script>
-
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const flashMessage = document.getElementById('flash-message');
+  
+      if (flashMessage) {
+        flashMessage.classList.add('show');
+  
+        // Hide after 3 seconds
+        setTimeout(() => {
+          flashMessage.classList.remove('show');
+        }, 3000);
+      }
+    });
+  </script>
+  
 </body>
 </html>
