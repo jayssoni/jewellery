@@ -223,3 +223,22 @@ button {
 .payment-status p {
   margin: 5px 0;
 }
+
+/* Home Button */
+.home-button {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+}

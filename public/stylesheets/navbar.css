@@ -6,11 +6,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95); /* Soft white with subtle transparency */
-  backdrop-filter: blur(10px); /* Smooth glass effect */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
   z-index: 1000;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -24,17 +24,21 @@
   padding: 1.5rem 2rem;
 }
 
-/* Brand Name - Premium Typography */
+/* Brand Logo - Aligned to Left */
+.navbar-logo {
+  flex-grow: 1;
+}
+
 .navbar-brand {
   font-size: 2rem;
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  color: #c9a227; /* Elegant gold color */
+  color: #c9a227;
   letter-spacing: 2px;
   text-transform: uppercase;
-  transition: color 0.3s ease-in-out;
   cursor: pointer;
   position: relative;
+  text-align: left;
 }
 
 .navbar-brand:hover {
@@ -57,13 +61,15 @@
   width: 100%;
 }
 
-/* Navbar Links */
+/* Navbar Links - Center */
 .navbar-links {
   list-style: none;
   display: flex;
   gap: 2rem;
   margin: 0;
   padding: 0;
+  position: absolute;
+  left: 40%;
 }
 
 .navbar-links li a {
@@ -80,8 +86,19 @@
   color: #c9a227;
 }
 
-/* Profile Picture */
+/* Profile Section - Aligned to Right */
+.navbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto;
+}
+
 .profile-pic {
+  position: absolute;
+  right: 5vw;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -90,6 +107,12 @@
 }
 
 /* Buttons */
+.navbar-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .navbar-cta button,
 .logout-btn {
   background: #222;
@@ -113,33 +136,38 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .navbar-container {
-      padding: 1.2rem 1.5rem;
+    padding: 1.2rem 1.5rem;
   }
 
   .navbar-links {
-      gap: 1.5rem;
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .navbar-container {
-      flex-direction: column;
-      align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .navbar-links {
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
   .navbar-profile {
-      margin-top: 1rem;
+    margin-top: 1rem;
+  }
+
+  .navbar-cta {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .navbar-cta button,
   .logout-btn {
-      width: 100%;
-      text-align: center;
+    width: 100%;
+    text-align: center;
   }
 }
