@@ -39,4 +39,37 @@ router.post('/', authMiddleware, async (req, res) => {
 });
 
 
+
+router.post('/update', authMiddleware, async (req, res) => {
+  try {
+    const { businessName, ownerName, gst, address, phone, email, idDocument, idType } = req.body;
+    const userId = req.user.id;
+
+    const userProfile = await Profile.findOne({ user: userId });
+    console.log("Existing Profile:", userProfile);
+
+    const updatedUser = await Profile.findOneAndUpdate(
+      { user: userId },
+      { $set: { businessName, ownerName, gst, address, phone, email, idDocument, idType } },
+      { new: true, runValidators: true }
+    );
+
+    console.log("Updated Profile:", updatedUser);
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "Profile not found" });
+    }
+
+    req.flash('success', 'Profile updated successfully');
+    res.redirect('/profile');
+  } catch (error) {
+    console.error("Update Error:", error);
+    req.flash('error', 'Error updating profile');
+    res.redirect('/profile');
+  }
+});
+
+
+
+
 module.exports = router;
