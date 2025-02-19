@@ -215,3 +215,18 @@ input:invalid, select:invalid {
 input:invalid + .error-message, select:invalid + .error-message {
     display: block;
 }
+
+.error-message {
+    color: red;
+    font-size: 0.875em;
+    display: none;
+    margin-top: 5px;
+}
+
+input:invalid, select:invalid {
+    border-color: red;
+}
+
+input:invalid + .error-message, select:invalid + .error-message {
+    display: block;
+}

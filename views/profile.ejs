@@ -75,7 +75,17 @@
                     <option value="pan" <%= profile && profile.idType === 'pan' ? 'selected' : '' %>>PAN Card</option>
                     <option value="passport" <%= profile && profile.idType === 'passport' ? 'selected' : '' %>>Passport</option>
                 </select>
+                <small class="error-message">Please select an ID type.</small>
             </div>
+
+            <!-- Password Field (Only for Update) -->
+            <% if (profile) { %>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="4">
+                    <small class="error-message">Password must be at least 4 characters long.</small>
+                </div>
+            <% } %>
 
             <!-- Submit Button -->
             <button type="submit"><%= profile ? 'Update' : 'Submit' %></button>
