@@ -48,6 +48,7 @@ router.post(
       const existingUser = await User.findOne({ email });
       if (existingUser) {
         return res.status(400).json({ error: 'Email already registered' });
+        
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -66,10 +67,14 @@ router.post(
       // Set token in cookie
       res.cookie('token', token, { httpOnly: true });
 
-      res.send("User Created Successfully");
+      // Set flash message and redirect to homepage
+      req.flash('success_msg', 'Signup successful! Welcome to our platform.');
+      res.redirect('/');
+
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Server error' });
+      
     }
   }
 );
