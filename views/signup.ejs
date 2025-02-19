@@ -10,13 +10,7 @@
 
 <body>
 
-<!-- Flash Messages -->
-<% if (success_msg) { %>
-    <p class="flash-message success"><%= success_msg %></p>
-<% } %>
-<% if (error_msg) { %>
-    <p class="flash-message error"><%= error_msg %></p>
-<% } %>
+
 
 <div class="signup-container">
     <h2>Sign Up</h2>
@@ -29,7 +23,8 @@
         <div class="input-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
-            <small class="error-message"></small>
+            <small class="error-message"><%= errors.email || '' %></small>
+
         </div>
         <div class="input-group">
             <label for="password">Password</label>

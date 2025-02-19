@@ -6,8 +6,9 @@ const jwt = require('jsonwebtoken'); // JWT library
 const { body, validationResult } = require('express-validator');
 
 router.get('/', (req, res) => {
-  res.render('signup'); // Render signup page
+  res.render('signup', { errors: {} });
 });
+
 
 router.post(
   '/',
@@ -47,9 +48,9 @@ router.post(
 
       const existingUser = await User.findOne({ email });
       if (existingUser) {
-        return res.status(400).json({ error: 'Email already registered' });
-        
+        return res.render('signup', { errors: { email: 'Email already registered' } });
       }
+      
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
