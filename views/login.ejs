@@ -14,9 +14,15 @@
         <h2>Welcome Back</h2>
         <p class="subtitle">Unlock timeless elegance</p>
 
-        <% if (error_msg) { %>
-            <p class="flash-message error"><%= error_msg %></p>
-        <% } %>
+        <div id="flash-container">
+            <% if (error_msg) { %>
+                <div class="flash-popup error"><%= error_msg %></div>
+            <% } %>
+            <% if (success_msg) { %>
+                <div class="flash-popup success"><%= success_msg %></div>
+            <% } %>
+        </div>
+        
 
         <form id="login-form" action="/login" method="post">
             <div class="input-group">
@@ -32,7 +38,18 @@
 
         <p class="signup-link">New here? <a href="/signup">Create an account</a></p>
     </div>
-
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", function () {
+            const flashMessage = document.querySelector(".flash-popup");
+            if (flashMessage) {
+                setTimeout(() => {
+                    flashMessage.style.display = "none";
+                }, 3000); // 3 seconds delay
+            }
+        });
+    </script>
+    
 </body>
 
 </html>

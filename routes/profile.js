@@ -5,20 +5,19 @@ const authMiddleware = require('../middleware/authMiddleware');
 
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    // Fetch profile data associated with the logged-in user  
-    const profile = await Profile.findOne({ user: req.user.id }); 
-
-    res.render('profile', { profile, user: req.user }); // Profile data ko frontend par bhejna  
+    const profile = await Profile.findOne({ user: req.user.id });
+    res.render('profile', { profile, user: req.user, messages: req.flash() });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error fetching profile data");      
+    res.status(500).send("Error fetching profile data");
   }
 });
 
-router.post('/',authMiddleware, async (req, res) => {
+
+router.post('/', authMiddleware, async (req, res) => {
   try {
     const { businessName, ownerName, gst, address, phone, email, idDocument, idType } = req.body;
-    const profileCreated = await Profile.create({
+    await Profile.create({
       businessName,
       ownerName,
       gst,
@@ -27,14 +26,17 @@ router.post('/',authMiddleware, async (req, res) => {
       email,
       idDocument,
       idType,
-      user: req.user.id, // Associate the profile with the logged-in user
+      user: req.user.id,
     });
 
-    res.send("Profile created successfully");
+    req.flash('success', 'Profile created successfully');
+    res.redirect('/profile'); // Redirect to profile page to display the flash message
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message });
+    req.flash('error', 'Error creating profile');
+    res.redirect('/profile');
   }
 });
+
 
 module.exports = router;
