@@ -1,96 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Invoice - <%= profile.businessName %></title>
-    <link rel="stylesheet" href="stylesheets/Billing.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Invoice - <%= profile?.businessName || "N/A" %></title>
+
+    <link rel="stylesheet" href="stylesheets/Billing.css" />
     <style>
-        /* Add any additional styles here */
+      /* Add any additional styles here */
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="invoice-container">
-        <div class="header">
-            <div class="company-details">
-                <div class="company-info">
-                    <h2><%= profile.businessName %></h2>
-                    <p><%= profile.address %></p>
-                    <p>Mobile: <%= profile.phone %></p>
-                </div>
-            </div>
-            <div class="gst-container">
-                <p class="gst-label">GSTIN:</p>
-                <p class="gst-value"><%= profile.gst %></p>
-            </div>
+      <div class="header">
+        <div class="company-details">
+          <div class="company-info">
+            <h2><%= profile?.businessName || "N/A" %></h2>
+            <p><%= profile?.address || "Address not available" %></p>
+            <p>Mobile: <%= profile?.phone || "N/A" %></p>
+          </div>
         </div>
-        
-        <h2 class="invoice-title">Tax Invoice</h2>
-        
-        <!-- Form starts here -->
-        <form id="invoice-form" action="/Billing" method="POST">
-            <div class="invoice-details">
-                <div class="invoice-meta">
-                    <p><strong>Invoice No:</strong> <input type="text" id="invoice-number" name="invoiceNumber" required></p>
-                    <p><strong>Date:</strong> <input type="date" id="invoice-date" name="invoiceDate" required></p>
-                </div>
-                <div class="customer-details">
-                    <h3>Invoice To:</h3>
-                    <p><strong>Name:</strong> <input type="text" id="customer-name" name="customerName" required></p>
-                    <p><strong>Address:</strong> <input type="text" id="customer-address" name="customerAddress" required></p>
-                    <p><strong>Mobile:</strong> <input type="text" id="customer-mobile" name="customerMobile" required></p>
-                </div>
-            </div>
-            
-            <table class="invoice-table" id="invoice-table">
-                <thead>
-                    <tr>
-                        <th>Item Description</th>
-                        <th>PCS</th>
-                        <th>Purity</th>
-                        <th>Weight (g)</th>
-                        <th>Rate (&#8377;/g)</th>
-                        <th>Amount (&#8377;)</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="invoice-body">
-                    <!-- Rows will be dynamically added here -->
-                </tbody>
-            </table>
-            <button type="button" onclick="addRow()" class="no-print">Add Item</button>
-            
-            <div class="footer">
-                <p><strong>Total Amount Payable: &#8377; <input type="text" id="total-amount" name="total" value="0.00" required></strong></p>
-            </div>
-            
-            <!-- New Payment Status Section -->
-            <div class="payment-status">
-                <p><strong>Amount Paid: &#8377; <input type="number" id="amount-paid" name="amountPaid" oninput="updateOutstanding()"></strong></p>
-                <p><strong>Outstanding Amount: &#8377; <span id="outstanding-amount">0.00</span></strong></p>
-                <p><strong>Payment Status:</strong> <span id="payment-status">Pending</span></p>
-            </div>
-            
-            <div class="signature-container">
-                <div class="customer-signature">
-                    <p>Customer Signature</p>
-                </div>
-                <div class="authorized-signature">
-                    <p>Authorized Signature</p>
-                </div>
-            </div>
-            
-            <div class="button-container no-print">
-                <button type="button" class="print-button" onclick="printInvoice()">Print</button>
-                <button type="submit" class="save-button">Save</button>
-                <button type="button" class="clear-button" onclick="clearRowData()">Clear</button>
-            </div>
-        </form>
-        <!-- Form ends here -->
+        <div class="gst-container">
+          <p class="gst-label">GSTIN:</p>
+          <p class="gst-value"><%= profile?.gst || "N/A" %></p>
+        </div>
+      </div>
+
+      <h2 class="invoice-title">Tax Invoice</h2>
+
+      <!-- Form starts here -->
+      <form
+        id="invoice-form"
+        action="/Billing"
+        method="POST"
+      >
+        <div class="invoice-details">
+          <div class="invoice-meta">
+            <p>
+              <strong>Invoice No:</strong>
+              <input
+                type="text"
+                id="invoice-number"
+                name="invoiceNumber"
+                required
+              />
+            </p>
+            <p>
+              <strong>Date:</strong>
+              <input
+                type="date"
+                id="invoice-date"
+                name="invoiceDate"
+                required
+              />
+            </p>
+          </div>
+          <div class="customer-details">
+            <h3>Invoice To:</h3>
+            <p>
+              <strong>Name:</strong>
+              <input
+                type="text"
+                id="customer-name"
+                name="customerName"
+                required
+              />
+            </p>
+            <p>
+              <strong>Address:</strong>
+              <input
+                type="text"
+                id="customer-address"
+                name="customerAddress"
+                required
+              />
+            </p>
+            <p>
+              <strong>Mobile:</strong>
+              <input
+                type="text"
+                id="customer-mobile"
+                name="customerMobile"
+                required
+              />
+            </p>
+          </div>
+        </div>
+
+        <table class="invoice-table" id="invoice-table">
+          <thead>
+            <tr>
+              <th>Item Description</th>
+              <th>PCS</th>
+              <th>Purity</th>
+              <th>Weight (g)</th>
+              <th>Rate (&#8377;/g)</th>
+              <th>Amount (&#8377;)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="invoice-body">
+            <!-- Rows will be dynamically added here -->
+          </tbody>
+        </table>
+        <button type="button" onclick="addRow()" class="no-print">
+          Add Item
+        </button>
+
+        <div class="footer">
+          <p>
+            <strong
+              >Total Amount Payable: &#8377;
+              <input
+                type="text"
+                id="total-amount"
+                name="total"
+                value="0.00"
+                required
+            /></strong>
+          </p>
+        </div>
+
+        <!-- New Payment Status Section -->
+        <div class="payment-status">
+          <p>
+            <strong
+              >Amount Paid: &#8377;
+              <input
+                type="number"
+                id="amount-paid"
+                name="amountPaid"
+                oninput="updateOutstanding()"
+            /></strong>
+          </p>
+          <p>
+            <strong
+              >Outstanding Amount: &#8377;
+              <span id="outstanding-amount">0.00</span></strong
+            >
+          </p>
+          <p>
+            <strong>Payment Status:</strong>
+            <span id="payment-status">Pending</span>
+          </p>
+        </div>
+
+        <div class="signature-container">
+          <div class="customer-signature">
+            <p>Customer Signature</p>
+          </div>
+          <div class="authorized-signature">
+            <p>Authorized Signature</p>
+          </div>
+        </div>
+
+        <div class="button-container no-print">
+          <button type="button" class="print-button" onclick="printInvoice()">
+            Print
+          </button>
+          <button type="submit" class="save-button">Save</button>
+          <button type="button" class="clear-button" onclick="clearRowData()">
+            Clear
+          </button>
+        </div>
+      </form>
+      <!-- Form ends here -->
     </div>
     <!-- Home Button -->
-<a href="/" class="home-button no-print">🏠 Home</a>
+    <a href="/" class="home-button no-print">🏠 Home</a>
 
     <script src="/javascripts/Billing.js"></script>
-</body>
+  </body>
 </html>
