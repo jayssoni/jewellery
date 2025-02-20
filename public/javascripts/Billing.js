@@ -93,6 +93,7 @@ function saveInvoice(event) {
       });
     }
   });
+  console.log("Invoice Items:", invoiceData.items);
 
   // Send the invoice data to the backend
   fetch("/Billing", {
