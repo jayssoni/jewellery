@@ -23,7 +23,7 @@ function addRow() {
 }
 
 function deleteRow(button) {
-  button.parentElement.parentElement.remove();
+  button.parentElement.parentElement.remove();  
   updateTotal();
 }
 
@@ -63,8 +63,6 @@ function updateOutstanding() {
   document.getElementById("outstanding-amount").innerText = outstandingAmount.toFixed(2);
   document.getElementById("payment-status").innerText = outstandingAmount <= 0 ? "Paid" : "Pending";
 }
-
-
 function saveInvoice(event) {
   event.preventDefault();
   let invoiceData = {
@@ -78,7 +76,7 @@ function saveInvoice(event) {
     outstandingAmount: document.getElementById("outstanding-amount").innerText,
     paymentStatus: document.getElementById("payment-status").innerText,
     items: [],
-  }};
+  };
 
   document.querySelectorAll("#invoice-body tr").forEach((row) => {
     const description = row.children[0]?.children[0]?.value.trim();
@@ -115,10 +113,12 @@ function saveInvoice(event) {
       console.error("Error:", error);
       alert("Failed to save the invoice. Please try again.");
     });
-  
+}
+
 function printInvoice() {
   window.print();
 }
+
 function updateAmount(input) {
   const row = input.closest("tr");
   const pcs = parseFloat(row.querySelector("td:nth-child(2) input").value) || 1;
