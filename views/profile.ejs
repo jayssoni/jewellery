@@ -7,18 +7,30 @@
     <link rel="stylesheet" href="/stylesheets/profile.css">
 </head>
 <body>
-
+<<<<<<< HEAD
     <div class="right-column">
         <h2>Business Profile</h2>
-        <form id="businessProfileForm" action="/profile" method="post">
+
+        <!-- Flash Messages -->
+        <% if (messages.success) { %>
+            <div class="flash-message success"><%= messages.success %></div>
+        <% } %>
+        <% if (messages.error) { %>
+            <div class="flash-message error"><%= messages.error %></div>
+        <% } %>
+
+        <!-- Business Profile Form -->
+        <form id="businessProfileForm" action="<%= profile ? '/profile/update' : '/profile' %>" method="post">
+            <!-- Hidden Input for User ID -->
+            <input type="hidden" name="user" value="<%= user.id %>">
+
             <!-- Business Name -->
             <div class="form-group">
                 <label for="businessName">Business Name</label>
                 <input type="text" id="businessName" name="businessName" value="<%= profile ? profile.businessName : '' %>" required minlength="2" maxlength="100">
                 <small class="error-message">Business Name must be between 2 and 100 characters.</small>
             </div>
-
-
+=======
     <% if (messages.success) { %>
         <div class="flash-message success"><%= messages.success %></div>
     <% } %>
@@ -26,7 +38,7 @@
         <div class="flash-message error"><%= messages.error %></div>
     <% } %>
     
-
+>>>>>>> dfdb61db0c7151ff9b5a7d0306407d4e5a5604fe
 
             <!-- Owner's Name -->
             <div class="form-group">
@@ -73,10 +85,20 @@
                     <option value="pan" <%= profile && profile.idType === 'pan' ? 'selected' : '' %>>PAN Card</option>
                     <option value="passport" <%= profile && profile.idType === 'passport' ? 'selected' : '' %>>Passport</option>
                 </select>
+                <small class="error-message">Please select an ID type.</small>
             </div>
 
+            <!-- Password Field (Only for Update) -->
+            <% if (profile) { %>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="4">
+                    <small class="error-message">Enter Your Password To Reset</small>
+                </div>
+            <% } %>
+
             <!-- Submit Button -->
-            <button type="submit">Submit</button>
+            <button type="submit"><%= profile ? 'Update' : 'Submit' %></button>
         </form>
     </div>
 
