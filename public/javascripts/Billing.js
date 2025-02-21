@@ -6,6 +6,29 @@ document.addEventListener("focusin", function (e) {
   }
 });
 
+// Function to generate the next invoice number
+function getNextInvoiceNumber() {
+  let lastInvoiceNumber = localStorage.getItem('lastInvoiceNumber') || 0;
+  lastInvoiceNumber = parseInt(lastInvoiceNumber) + 1;
+  localStorage.setItem('lastInvoiceNumber', lastInvoiceNumber);
+  return lastInvoiceNumber;
+}
+
+// Function to set the current date
+function setCurrentDate() {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const dd = String(today.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+// Set the invoice number and date when the page loads
+window.onload = function() {
+  document.getElementById('invoice-number').value = getNextInvoiceNumber();
+  document.getElementById('invoice-date').value = setCurrentDate();
+};
+
 function addRow() {
   let table = document.getElementById("invoice-body");
   let row = document.createElement("tr");
@@ -55,7 +78,6 @@ function updateTotal() {
   updateOutstanding();
 }
 
-
 function updateOutstanding() {
   const totalAmount = parseFloat(document.getElementById("total-amount").value) || 0;
   const amountPaid = parseFloat(document.getElementById("amount-paid").value) || 0;
@@ -63,6 +85,7 @@ function updateOutstanding() {
   document.getElementById("outstanding-amount").innerText = outstandingAmount.toFixed(2);
   document.getElementById("payment-status").innerText = outstandingAmount <= 0 ? "Paid" : "Pending";
 }
+
 function saveInvoice(event) {
   event.preventDefault();
   let invoiceData = {
