@@ -3,15 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Ledger</title>
+    <title>Invoice History</title>
     <link rel="stylesheet" href="/stylesheets/pleged.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Additional Styles for Sidebar and Buttons */
+        .details-btn {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background-color: #5a2d82;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .details-btn:hover {
+            background-color: #7b3ca3;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 20px;
+            z-index: 1000;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+        }
+
+        .close-btn {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .close-btn:hover {
+            background-color: #ff6666;
+        }
+
+        .invoice-items ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .invoice-items li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .invoice-items li:last-child {
+            border-bottom: none;
+        }
+    </style>
 </head>
 <body>
 
+    <header>
+        <h2>📜 Invoice History</h2>
+    </header>
 
-    
+    <!-- Search Box -->
+    <div class="search-container">
+        <input type="text" id="searchInvoice" placeholder="Search by Invoice Number">
+    </div>
 
-   
+    <div class="container">
+        <!-- Paid Invoices Section -->
+        <h3 class="section-title paid-title">✅ Paid Invoices</h3>
+        <% let paidInvoices = invoices.filter(inv => inv.paymentStatus === "Paid"); %>
+        <% if (paidInvoices.length > 0) { %>
+            <% paidInvoices.forEach((invoice, index) => { %>
+                <div class="invoice-card">
+                    <div class="invoice-header">
+                        <span class="invoice-number">Invoice No: <%= invoice.invoiceNumber %></span>
+                        <span class="status paid">Paid</span>
+                    </div>
+                    <div class="invoice-details">
+                        <p><span class="label">Name:</span> <span class="value"><%= invoice.customerName %></span></p>
+                        <p><span class="label">Date:</span> <span class="value"><%= new Date(invoice.invoiceDate).toLocaleDateString() %></span></p>
+                    </div>
+                    <div class="invoice-amount">
+                        <p><span class="label">Total:</span> <span class="value">₹<%= invoice.total.toFixed(2) %></span></p>
+                        <p><span class="label">Paid:</span> <span class="value">₹<%= invoice.amountPaid.toFixed(2) %></span></p>
+                    </div>
+
+                    <!-- View Details Button -->
+                    <button class="details-btn" onclick="showDetails(<%= index %>, 'Paid')">View Details</button>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p class="no-data">No Paid Invoices ✅</p>
+        <% } %>
+
+        <!-- Pending Invoices Section -->
+        <h3 class="section-title pending-title">⚠️ Pending Invoices</h3>
+        <% let pendingInvoices = invoices.filter(inv => inv.paymentStatus === "Pending"); %>
+        <% if (pendingInvoices.length > 0) { %>
+            <% pendingInvoices.forEach((invoice, index) => { %>
+                <div class="invoice-card">
+                    <div class="invoice-header">
+                        <span class="invoice-number">Invoice No: <%= invoice.invoiceNumber %></span>
+                        <span class="status pending">Pending</span>
+                    </div>
+                    <div class="invoice-details">
+                        <p><span class="label">Name:</span> <span class="value"><%= invoice.customerName %></span></p>
+                        <p><span class="label">Date:</span> <span class="value"><%= new Date(invoice.invoiceDate).toLocaleDateString() %></span></p>
+                    </div>
+                    <div class="invoice-amount">
+                        <p><span class="label">Total:</span> <span class="value">₹<%= invoice.total.toFixed(2) %></span></p>
+                        <p><span class="label">Paid:</span> <span class="value">₹<%= invoice.amountPaid.toFixed(2) %></span></p>
+                        <p><span class="label">Due:</span> <span class="value">₹<%= invoice.outstandingAmount.toFixed(2) %></span></p>
+                    </div>
+
+                    <!-- View Details Button -->
+                    <button class="details-btn" onclick="showDetails(<%= index %>, 'Pending')">View Details</button>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p class="no-data">No Pending Invoices ⚠️</p>
+        <% } %>
+    </div>
+
+    <!-- Details Sidebar -->
+    <div id="invoiceSidebar" class="sidebar">
+        <div class="sidebar-content">
+            <h3>Invoice Details</h3>
+            <div id="invoiceDetails"></div>
+            <button class="close-btn" onclick="closeSidebar()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to Show Invoice Details in Sidebar
+        function showDetails(index, type) {
+            let invoices = type === "Paid" ? <%- JSON.stringify(paidInvoices) %> : <%- JSON.stringify(pendingInvoices) %>;
+            let invoice = invoices[index];
+
+            let detailsHTML = `
+                <p><strong>Invoice No:</strong> ${invoice.invoiceNumber}</p>
+                <p><strong>Name:</strong> ${invoice.customerName}</p>
+                <p><strong>Date:</strong> ${new Date(invoice.invoiceDate).toLocaleDateString()}</p>
+                <p><strong>Address:</strong> ${invoice.customerAddress}</p>
+                <p><strong>Total:</strong> ₹${invoice.total.toFixed(2)}</p>
+                <p><strong>Paid:</strong> ₹${invoice.amountPaid.toFixed(2)}</p>
+                ${type === "Pending" ? `<p><strong>Due:</strong> ₹${invoice.outstandingAmount.toFixed(2)}</p>` : ""}
+                <h4>🛒 Items Purchased:</h4>
+                <ul>
+                    ${invoice.items.map(item => `
+                        <li>
+                            <p><strong>Description:</strong> ${item.description}</p>
+                            <p><strong>Pcs:</strong> ${item.pcs} | <strong>Purity:</strong> ${item.purity}</p>
+                            <p><strong>Weight:</strong> ${item.weight} g | <strong>Rate:</strong> ₹${item.rate} per g</p>
+                            <p><strong>Amount:</strong> ₹${item.amount}</p>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+
+            document.getElementById("invoiceDetails").innerHTML = detailsHTML;
+            document.getElementById("invoiceSidebar").style.width = "350px";
+        }
+
+        // Function to Close Sidebar
+        function closeSidebar() {
+            document.getElementById("invoiceSidebar").style.width = "0";
+        }
+
+        // Search Functionality
+        document.getElementById("searchInvoice").addEventListener("input", function () {
+            const searchTerm = this.value.toLowerCase();
+            const invoiceCards = document.querySelectorAll(".invoice-card");
+
+            invoiceCards.forEach(card => {
+                const invoiceNumber = card.querySelector(".invoice-number").textContent.toLowerCase();
+                if (invoiceNumber.includes(searchTerm)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
