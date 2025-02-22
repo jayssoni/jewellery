@@ -24,18 +24,15 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // POST: Create a new invoice
+// POST: Create a new invoice
 router.post('/', authMiddleware, async (req, res) => {
     try {
-        console.log("Received data:", req.body); // Debugging step
-
-        // Destructure and validate required fields
         const { invoiceNumber, invoiceDate, customerName, customerAddress, customerMobile, total, amountPaid, user, profile, items } = req.body;
 
         if (!invoiceNumber || !invoiceDate || !customerName || !customerAddress || !customerMobile || !total) {
             return res.status(400).json({ error: "Missing required fields." });
         }
 
-        // Convert to numbers and validate
         const parsedInvoiceNumber = Number(invoiceNumber);
         const parsedTotal = Number(total);
         const parsedAmountPaid = Number(amountPaid) || 0;
@@ -44,11 +41,9 @@ router.post('/', authMiddleware, async (req, res) => {
             return res.status(400).json({ error: "Invalid invoiceNumber, total, or amountPaid." });
         }
 
-        // Calculate outstanding amount and payment status
         const outstandingAmount = parsedTotal - parsedAmountPaid;
         const paymentStatus = outstandingAmount <= 0 ? "Paid" : "Pending";
 
-        // Create the invoice
         const newInvoice = await invoiceData.create({
             invoiceNumber: parsedInvoiceNumber,
             invoiceDate,
@@ -59,19 +54,20 @@ router.post('/', authMiddleware, async (req, res) => {
             amountPaid: parsedAmountPaid,
             outstandingAmount,
             paymentStatus,
-            items, // Include items if provided
-            user, // Include user if available
-            profile // Include profile if available
+            items,
+            user,
+            profile
         });
 
         console.log("Invoice created successfully:", newInvoice);
-        res.status(201).json({ message: "Invoice created", invoice: newInvoice });
+        res.redirect('/'); // ✅ Redirect to home after successful invoice creation
 
     } catch (error) {
         console.error("Error creating invoice:", error);
         res.status(500).json({ error: error.message || "Server error while creating invoice." });
     }
 });
+
 
 // PUT: Update an invoice (e.g., when a payment is made)
 router.put('/:id', authMiddleware, async (req, res) => {
