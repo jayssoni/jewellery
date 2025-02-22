@@ -94,6 +94,59 @@ body {
   color: #555;
 }
 
+.contact-us {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.contact-us h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  position: relative;
+  color: #8D493A;
+}
+
+.contact-us h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #8D493A;
+  margin: 10px auto 0;
+  border-radius: 4px;
+}
+
+.contact-us p {
+  font-size: 1rem;
+  margin: 10px 0;
+  color: #333;
+}
+
+.contact-us strong {
+  color: #8D493A;
+}
+
+@media (max-width: 768px) {
+  .contact-us {
+    padding: 20px;
+  }
+
+  .contact-us h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-us p {
+    font-size: 0.95rem;
+  }
+}
+
+
 .hero-btn {
   background: #c9a227;
   color: #fff;
